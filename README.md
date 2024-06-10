@@ -32,7 +32,7 @@ The application should:
 
 ## Screenshots
 
-![Video](ScreenShots/app.mp4)
+![Video](ScreenShots/app.gif)
 
 ![Screen Shot 1](ScreenShots/screenShot1.png)
 
