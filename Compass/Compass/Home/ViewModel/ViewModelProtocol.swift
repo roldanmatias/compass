@@ -10,4 +10,5 @@ import Foundation
 protocol ViewModelProtocol {
     var state: State { get }
     func send(_ event: Event)
+    func goToDetail(data: [String], title: String)
 }

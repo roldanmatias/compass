@@ -12,6 +12,8 @@ final class ViewModel: ViewModelProtocol {
     
     @Published var state: State
     
+    weak var coordinator: HomeCoordinator?
+    
     private var charactersUseCase: EveryCharacterUseCaseProtocol
     private var wordsUseCase: WordCounterUseCaseProtocol
     private var tracking: TrackingProtocol
@@ -34,6 +36,10 @@ final class ViewModel: ViewModelProtocol {
         case .requestData:
             load()
         }
+    }
+    
+    func goToDetail(data: [String], title: String) {
+        coordinator?.goToDetail(data: data, title: title)
     }
 }
 

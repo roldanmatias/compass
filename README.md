@@ -29,6 +29,14 @@ The application should:
 
 ![Architecture](ScreenShots/architecture.png)
 
+## Branchs
+
+- main
+Navigation using SceneDelegate and segue
+
+- coordinator
+Navigation using coordinators
+
 
 ## Screenshots
 

@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var requestDataButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
+    var viewModel: ViewModel?
+    
     enum InfoRow: Int {
         case everyCharacter
         case wordsCounter
@@ -24,7 +26,6 @@ class ViewController: UIViewController {
         static let cellIdentifier = "Cell"
     }
     
-    private var viewModel = Factory.createViewModel()
     private var cancellables: Set<AnyCancellable> = .init()
     private var requests: [RequestInfo] = []
     private var characters: [Character]?
@@ -43,28 +44,7 @@ class ViewController: UIViewController {
     
     @IBAction func requestData(_ sender: Any) {
         requestDataButton.isHidden = true
-        viewModel.send(.requestData)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard 
-            segue.identifier == Constant.detailSegueIdentifier,
-            let collectionViewController = segue.destination as? CollectionViewController,
-            let infoRow = sender as? InfoRow
-        else {
-            return
-        }
-        
-        switch infoRow {
-        case .everyCharacter:
-            collectionViewController.data = characters?.map { String($0) }
-            collectionViewController.title = String(localized: "every_10th_character")
-        case .wordsCounter:
-            collectionViewController.data = wordsCounter?.map { (key: String, value: Int) in
-                "\(key) = \(value)"
-            }
-            collectionViewController.title = String(localized: "occurrence_unique_word")
-        }
+        viewModel?.send(.requestData)
     }
 }
 
@@ -87,7 +67,7 @@ private extension ViewController {
     }
     
     func subscribeToViewModel() {
-        viewModel.$state.sink { [weak self] state in
+        viewModel?.$state.sink { [weak self] state in
             guard let self = self else { return }
             
             switch state {
@@ -152,6 +132,21 @@ extension ViewController: UITableViewDelegate {
             let infoRow = InfoRow(rawValue: indexPath.row) 
         else { return } 
         
-        performSegue(withIdentifier: Constant.detailSegueIdentifier, sender: infoRow)
+        switch infoRow {
+        case .everyCharacter:
+            guard let characters = characters else { return }
+            viewModel?.goToDetail(
+                data: characters.map { String($0) }, 
+                title: String(localized: "every_10th_character")
+            )
+        case .wordsCounter:
+            guard let wordsCounter = wordsCounter else { return }
+            viewModel?.goToDetail(
+                data: wordsCounter.map { (key: String, value: Int) in
+                    "\(key) = \(value)"
+                }, 
+                title: String(localized: "occurrence_unique_word")
+            )
+        }
     }
 }
