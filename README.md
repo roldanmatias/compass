@@ -26,6 +26,23 @@ The application should:
 **Frameworks:** UIKit, Foundation, Combine
 
 **Tests:** Unit test, UI tests
+
+![Architecture](ScreenShots/architecture.png)
+
+
+## Screenshots
+
+![Video](ScreenShots/app.mp4)
+
+![Screen Shot 1](ScreenShots/screenShot1.png)
+
+![Screen Shot 2](ScreenShots/screenShot2.png)
+
+![Screen Shot 3](ScreenShots/screenShot3.png)
+
+![Screen Shot 4](ScreenShots/screenShot4.png)
+
+
 ## Author
 
 Matias Leandro Martin Roldan
