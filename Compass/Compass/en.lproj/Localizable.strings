@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  Compass
+
+  Created by Matias Roldan on 07/06/2024.
+  
+*/
+
+"demo_description" = "Demo app that runs 2 requests simultaneously";
+"every_10th_character" = "Every 10th character";
+"loaded" = "Loaded";
+"loading" = "Loading";
+"loading_error" = "Error";
+"not_loaded" = "Not loaded";
+"occurrence_unique_word" = "Occurrence of every unique word";
+"request_button" = "Request data";
